@@ -258,5 +258,21 @@ Address varchar ( 255 ) , City varchar ( 255 ) ) ")
       @result = @evaluator.parse("DROP INDEX abc ON bogus")
       test.to eq(" DROP INDEX abc ON bogus ")
     end
+
+    it 'tests for linestring srid' do
+      @result = @evaluator.parse("ALTER TABLE bogus ADD COLUMN geom linestring SRID 0 NOT NULL")
+      test.to eq(" ALTER TABLE bogus ADD COLUMN geom linestring SRID 0 NOT NULL ")
+    end
+
+    it 'test SRID attribute only on spatial columns' do
+      expect {
+        @evaluator.parse("ALTER TABLE bogus ADD COLUMN id bigint SRID 0 NOT NULL")
+      }.to raise_error(Racc::ParseError)
+    end
+
+    it 'tests for spatial index' do
+      @result = @evaluator.parse("ALTER TABLE bogus ADD SPATIAL INDEX sptl_idx (geo_col)")
+      test.to eq(" ALTER TABLE bogus ADD SPATIAL INDEX sptl_idx ( geo_col ) ")
+    end
   end
 end
