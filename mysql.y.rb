@@ -1235,6 +1235,7 @@ rule
   | IGNORE { call(:dot, :IGNORE, val) }
   | IF { call(:dot, :IF, val) }
   | HASH { call(:dot, :HASH, val) }
+  | GENERATED { call(:dot, :GENERATED, val) }
   | FULLTEXT { call(:dot, :FULLTEXT, val) }
   | FULL { call(:dot, :FULL, val) }
   | FOREIGN { call(:dot, :FOREIGN, val) }
@@ -1291,6 +1292,7 @@ rule
   | ASC { call(:dot, :ASC, val) }
   | AS { call(:dot, :AS, val) }
   | ANALYZE { call(:dot, :ANALYZE, val) }
+  | ALWAYS { call(:dot, :ALWAYS, val) }
   | ALTER { call(:dot, :ALTER, val) }
   | ALL { call(:dot, :ALL, val) }
   | ALGORITHM { call(:dot, :ALGORITHM, val) }

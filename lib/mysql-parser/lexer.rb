@@ -410,6 +410,9 @@ class MySQLParser < Racc::Parser
                   when (text = @ss.scan(/HASH\b/i))
                      action { [:HASH, text] }
 
+                  when (text = @ss.scan(/GENERATED\b/i))
+                     action { [:GENERATED, text] }
+
                   when (text = @ss.scan(/FULLTEXT\b/i))
                      action { [:FULLTEXT, text] }
 
@@ -577,6 +580,9 @@ class MySQLParser < Racc::Parser
 
                   when (text = @ss.scan(/ANALYZE\b/i))
                      action { [:ANALYZE, text] }
+
+                  when (text = @ss.scan(/ALWAYS\b/i))
+                     action { [:ALWAYS, text] }
 
                   when (text = @ss.scan(/ALTER\b/i))
                      action { [:ALTER, text] }

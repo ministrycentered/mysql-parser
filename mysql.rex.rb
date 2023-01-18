@@ -163,6 +163,7 @@ rule
 :A_NIL IGNORE\b { [:IGNORE, text] }
 :A_NIL IF\b { [:IF, text] }
 :A_NIL HASH\b { [:HASH, text] }
+:A_NIL GENERATED\b { [:GENERATED, text] }
 :A_NIL FULLTEXT\b { [:FULLTEXT, text] }
 :A_NIL FULL\b { [:FULL, text] }
 :A_NIL FOREIGN\b { [:FOREIGN, text] }
@@ -219,6 +220,7 @@ rule
 :A_NIL ASC\b { [:ASC, text] }
 :A_NIL AS\b { [:AS, text] }
 :A_NIL ANALYZE\b { [:ANALYZE, text] }
+:A_NIL ALWAYS\b { [:ALWAYS, text] }
 :A_NIL ALTER\b { [:ALTER, text] }
 :A_NIL ALL\b { [:ALL, text] }
 :A_NIL ALGORITHM\b { [:ALGORITHM, text] }
