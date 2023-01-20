@@ -432,6 +432,7 @@ rule
   | r_COLUMN_FORMAT { call(:r_column_attribute, :COLUMN_FORMAT, val) }
   | r_STORAGE { call(:r_column_attribute, :STORAGE, val) }
   | r_COLUMN_ON_UPDATE { call(:r_column_attribute, :COLUMN_ON_UPDATE, val) }
+  | r_COLUMN_GENERATED_ALWAYS { call(:r_column_attribute, :COLUMN_GENERATED_ALWAYS, val) }
 
   # ============================
   # ======= CREATE INDEX =======
@@ -604,6 +605,10 @@ rule
   r_COLUMN_ON_UPDATE :
     ON S UPDATE S literal
     { call(:r_COLUMN_ON_UPDATE, :UPDATE, val) }
+
+  r_COLUMN_GENERATED_ALWAYS :
+    GENERATED S ALWAYS S AS star
+    { call(:r_COLUMN_GENERATED_ALWAYS, :GENERATED_ALWAYS, val) }
 
   r_RESTRICT_or_CASCADE :
     RESTRICT S
@@ -1230,6 +1235,7 @@ rule
   | IGNORE { call(:dot, :IGNORE, val) }
   | IF { call(:dot, :IF, val) }
   | HASH { call(:dot, :HASH, val) }
+  | GENERATED { call(:dot, :GENERATED, val) }
   | FULLTEXT { call(:dot, :FULLTEXT, val) }
   | FULL { call(:dot, :FULL, val) }
   | FOREIGN { call(:dot, :FOREIGN, val) }
@@ -1286,6 +1292,7 @@ rule
   | ASC { call(:dot, :ASC, val) }
   | AS { call(:dot, :AS, val) }
   | ANALYZE { call(:dot, :ANALYZE, val) }
+  | ALWAYS { call(:dot, :ALWAYS, val) }
   | ALTER { call(:dot, :ALTER, val) }
   | ALL { call(:dot, :ALL, val) }
   | ALGORITHM { call(:dot, :ALGORITHM, val) }

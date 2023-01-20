@@ -274,5 +274,10 @@ Address varchar ( 255 ) , City varchar ( 255 ) ) ")
       @result = @evaluator.parse("ALTER TABLE bogus ADD SPATIAL INDEX sptl_idx (geo_col)")
       test.to eq(" ALTER TABLE bogus ADD SPATIAL INDEX sptl_idx ( geo_col ) ")
     end
+
+    it 'tests for generated columns' do
+      @result = @evaluator.parse("ALTER TABLE bogus ADD active tinyint GENERATED ALWAYS AS (IF(deleted_at IS NULL, '1', NULL)) STORED")
+      test.to eq(" ALTER TABLE bogus ADD active tinyint GENERATED ALWAYS AS ( IF ( deleted_at IS NULL , '1' , NULL ) ) STORED ")
+    end
   end
 end
