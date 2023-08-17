@@ -170,6 +170,17 @@ rule
   | IGNORE S
     { call(:r_opt_IGNORE, :body, val) }
 
+  r_VISIBLE_INVISIBLE :
+    VISIBLE S { call(:r_VISIBLE_INVISIBLE, :VISIBLE, val) }
+  | INVISIBLE S { call(:r_VISIBLE_INVISIBLE, :INVISIBLE, val) }
+
+  r_opt_VISIBLE_INVISIBLE :
+    { call(:r_opt_VISIBLE_INVISIBLE, :empty, val) }
+  | VISIBLE S
+    { call(:r_opt_VISIBLE_INVISIBLE, :VISIBLE, val) }
+  | INVISIBLE S
+    { call(:r_opt_VISIBLE_INVISIBLE, :INVISIBLE, val) }
+
   r_opt_alter_commands :
     { call(:r_opt_alter_commands, :empty, val) }
   | r_comma_separated_alter_specification
@@ -231,6 +242,8 @@ rule
   | CHANGE S r_opt_COLUMN r_col_name r_col_name r_column_definition
     r_opt_pos_column
     { call(:r_alter_specification, :CHANGE_col, val) }
+  | ALTER S INDEX S r_index_name r_VISIBLE_INVISIBLE
+    { call(:r_alter_specification, :VISIBLE_INVISIBLE, val) }
   | DROP S r_opt_COLUMN r_col_name
     { call(:r_alter_specification, :DROP_col, val) }
   | DROP S FOREIGN S KEY S r_fk_symbol
@@ -442,7 +455,7 @@ rule
     CREATE S r_opt_ONLINE_OFFLINE r_opt_UNIQUE_or_FULLTEXT_or_SPATIAL
     INDEX S r_index_name r_opt_index_type ON S r_tbl_name
     left_paren r_comma_separated_index_col_name right_paren
-    r_opt_index_option
+    r_opt_index_option r_opt_VISIBLE_INVISIBLE
     { call(:r_CREATE_INDEX, nil, val) }
 
   r_opt_UNIQUE_or_FULLTEXT_or_SPATIAL :

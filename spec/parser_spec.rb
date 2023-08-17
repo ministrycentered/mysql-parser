@@ -254,6 +254,16 @@ Address varchar ( 255 ) , City varchar ( 255 ) ) ")
       test.to eq(" CREATE INDEX abc ON bogus ( a , b ) ")
     end
 
+    it 'tests for create invisible index' do
+      @result = @evaluator.parse("CREATE INDEX abc ON bogus (a, b) INVISIBLE")
+      test.to eq(" CREATE INDEX abc ON bogus ( a , b ) INVISIBLE ")
+    end
+
+    it 'tests for create visible index' do
+      @result = @evaluator.parse("CREATE INDEX abc ON bogus (a, b) VISIBLE")
+      test.to eq(" CREATE INDEX abc ON bogus ( a , b ) VISIBLE ")
+    end
+
     it 'tests for drop index' do
       @result = @evaluator.parse("DROP INDEX abc ON bogus")
       test.to eq(" DROP INDEX abc ON bogus ")
@@ -278,6 +288,16 @@ Address varchar ( 255 ) , City varchar ( 255 ) ) ")
     it 'tests for generated columns' do
       @result = @evaluator.parse("ALTER TABLE bogus ADD active tinyint GENERATED ALWAYS AS (IF(deleted_at IS NULL, '1', NULL)) STORED")
       test.to eq(" ALTER TABLE bogus ADD active tinyint GENERATED ALWAYS AS ( IF ( deleted_at IS NULL , '1' , NULL ) ) STORED ")
+    end
+
+    it 'tests for invisible indexes' do
+      @result = @evaluator.parse("ALTER TABLE bogus ALTER INDEX abc INVISIBLE")
+      test.to eq(" ALTER TABLE bogus ALTER INDEX abc INVISIBLE ")
+    end
+
+    it 'tests for visible indexes' do
+      @result = @evaluator.parse("ALTER TABLE bogus ALTER INDEX abc VISIBLE")
+      test.to eq(" ALTER TABLE bogus ALTER INDEX abc VISIBLE ")
     end
   end
 end
