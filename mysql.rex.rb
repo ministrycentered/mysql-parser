@@ -64,6 +64,7 @@ rule
 :A_NIL ZEROFILL\b { [:ZEROFILL, text] }
 :A_NIL YEAR\b { [:YEAR, text] }
 :A_NIL WITH\b { [:WITH, text] }
+:A_NIL VISIBLE\b { [:VISIBLE, text] }
 :A_NIL VIEW\b { [:VIEW, text] }
 :A_NIL VARCHAR\b { [:VARCHAR, text] }
 :A_NIL VARBINARY\b { [:VARBINARY, text] }
@@ -152,6 +153,7 @@ rule
 :A_NIL KEYS\b { [:KEYS, text] }
 :A_NIL KEY\b { [:KEY, text] }
 :A_NIL INVOKER\b { [:INVOKER, text] }
+:A_NIL INVISIBLE\b { [:INVISIBLE, text] }
 :A_NIL INTO\b { [:INTO, text] }
 :A_NIL INTEGER\b { [:INTEGER, text] }
 :A_NIL INT\b { [:INT, text] }

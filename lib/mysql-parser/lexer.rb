@@ -113,6 +113,9 @@ class MySQLParser < Racc::Parser
                   when (text = @ss.scan(/WITH\b/i))
                      action { [:WITH, text] }
 
+                  when (text = @ss.scan(/VISIBLE\b/i))
+                     action { [:VISIBLE, text] }
+
                   when (text = @ss.scan(/VIEW\b/i))
                      action { [:VIEW, text] }
 
@@ -376,6 +379,9 @@ class MySQLParser < Racc::Parser
 
                   when (text = @ss.scan(/INVOKER\b/i))
                      action { [:INVOKER, text] }
+
+                  when (text = @ss.scan(/INVISIBLE\b/i))
+                     action { [:INVISIBLE, text] }
 
                   when (text = @ss.scan(/INTO\b/i))
                      action { [:INTO, text] }

@@ -1126,6 +1126,7 @@ rule
     ZEROFILL { call(:dot, :ZEROFILL, val) }
   | YEAR { call(:dot, :YEAR, val) }
   | WITH { call(:dot, :WITH, val) }
+  | VISIBLE { call(:dot, :VISIBLE, val) }
   | VIEW { call(:dot, :VIEW, val) }
   | VARCHAR { call(:dot, :VARCHAR, val) }
   | VARBINARY { call(:dot, :VARBINARY, val) }
@@ -1237,6 +1238,7 @@ rule
   | KEYS { call(:dot, :KEYS, val) }
   | KEY { call(:dot, :KEY, val) }
   | INVOKER { call(:dot, :INVOKER, val) }
+  | INVISIBLE { call(:dot, :INVISIBLE, val) }
   | INTO { call(:dot, :INTO, val) }
   | INTEGER { call(:dot, :INTEGER, val) }
   | INT { call(:dot, :INT, val) }
