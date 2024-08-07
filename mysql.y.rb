@@ -426,6 +426,7 @@ rule
   r_column_attribute :
     r_NULL_status { call(:r_column_attribute, :NULL_status, val) }
   | r_DEFAULT_with_val { call(:r_column_attribute, :DEFAULT, val) }
+  | r_DEFAULT_with_expr { call(:r_column_attribute, :DEFAULT, val) }
   | r_AUTO_INCREMENT { call(:r_column_attribute, :AUTO_INCREMENT, val) }
   | r_UNIQUE_or_PRIMARY { call(:r_column_attribute, :UNIQUE_or_PRIMARY, val) }
   | r_COMMENT_with_val { call(:r_column_attribute, :COMMENT, val) }
@@ -536,6 +537,13 @@ rule
   r_DEFAULT_with_val :
     DEFAULT S value
     { call(:r_DEFAULT_with_val, :body, val) }
+
+  r_DEFAULT_with_expr :
+    DEFAULT S left_paren r_func_call_empty right_paren
+    { call(:r_DEFAULT_with_expr, :body, val) }
+  | DEFAULT S left_paren string right_paren
+    { call(:r_DEFAULT_with_expr, :body, val) }
+
 
   r_AUTO_INCREMENT :
     AUTO_INCREMENT S
@@ -906,6 +914,10 @@ rule
   r_collation_name : raw_ident  { call(:r_collation_name, nil, val) }
   r_col_name : ident { call(:r_col_name, nil, val) }
   r_tbl_name : r_tbl_name_int { call(:r_tbl_name, nil, val) }
+
+  r_func_call_empty :
+    ident left_paren right_paren
+    { call(:r_func_call_empty, :empty_func_call, val) }
 
   r_tbl_name_int :
     ident
