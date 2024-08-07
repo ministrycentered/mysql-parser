@@ -292,12 +292,12 @@ Address varchar ( 255 ) , City varchar ( 255 ) ) ")
 
     it 'tests for json default array func' do
       @result = @evaluator.parse("ALTER TABLE bogus ADD COLUMN json_col JSON DEFAULT (JSON_ARRAY())")
-      test.to eq(" ALTER TABLE bogus ADD COLUMN json_col JSON DEFAULT ( JSON_ARRAY() ) ")
+      test.to eq(" ALTER TABLE bogus ADD COLUMN json_col JSON DEFAULT ( JSON_ARRAY ( ) ) ")
     end
 
     it 'tests for json default object func' do
       @result = @evaluator.parse("ALTER TABLE bogus ADD COLUMN json_col JSON DEFAULT (JSON_OBJECT())")
-      test.to eq(" ALTER TABLE bogus ADD COLUMN json_col JSON DEFAULT ( JSON_OBJECT() ) ")
+      test.to eq(" ALTER TABLE bogus ADD COLUMN json_col JSON DEFAULT ( JSON_OBJECT ( ) ) ")
     end
   end
 end
